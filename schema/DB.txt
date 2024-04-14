@@ -1,0 +1,48 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema game_dev
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema game_dev
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `game_dev` DEFAULT CHARACTER SET utf8 ;
+USE `game_dev` ;
+
+-- -----------------------------------------------------
+-- Table `game_dev`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `game_dev`.`user` (
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
+  PRIMARY KEY (`username`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `game_dev`.`concept`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `game_dev`.`concept` (
+  `name` VARCHAR(45) NOT NULL,
+  `save_seed` VARCHAR(255) NOT NULL,
+  `user_username` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`name`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE,
+  INDEX `fk_concept_user_idx` (`user_username` ASC) VISIBLE,
+  CONSTRAINT `fk_concept_user`
+    FOREIGN KEY (`user_username`)
+    REFERENCES `game_dev`.`user` (`username`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
