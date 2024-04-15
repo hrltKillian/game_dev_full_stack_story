@@ -8,3 +8,4 @@ Commit n°6 : added a controller and primary functions to use
 Commit n°7 : updated EntityRepository.php and Controller.php to have singletons to same memory and space
 Commit n°8 : added repositories and controllers for each entity
 Commit n°9 : added getView() in controller.php
+Commit n°10 : rearranged templates. Started rooter in index.php. Created 404 repository, controller and view. Redirection to 404 page finished. 

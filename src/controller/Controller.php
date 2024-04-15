@@ -1,10 +1,12 @@
 <?php
 
-require_once "../repository/EntityRepository.php";
+require_once "../src/repository/UserRepository.php";
+require_once "../src/repository/ConceptRepository.php";
+require_once "../src/repository/NotFoundRepository.php";
 
 abstract class Controller
 {
-    private EntityRepository $entityRepository;
+    protected EntityRepository $entityRepository;
 
     /**
      * Constructor
@@ -21,7 +23,7 @@ abstract class Controller
 
     public function getView(string $viewName, array $data = []) : void
     {
-        require_once "../../templates/" .$viewName. "/index.html.php";
+        require_once "../templates/".$viewName.".html.php";
     }
 
     /**
@@ -81,4 +83,9 @@ abstract class Controller
         $this->entityRepository->delete($valuePK);
     }
 
+
+    public function getEntityRepository()
+    {
+        return $this->entityRepository;
+    }
 }

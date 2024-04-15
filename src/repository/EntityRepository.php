@@ -1,12 +1,12 @@
 <?php
 
-require_once "../../public/config.php";
+require_once "../public/config.php";
 
 abstract class EntityRepository
 {
-    private PDO $pdo;
-    private string $table;
-    private string $primaryKey;
+    protected PDO $pdo;
+    protected string $table;
+    protected string $primaryKey;
 
     public function __construct(string $table, string $primaryKey)
     {
@@ -137,4 +137,14 @@ abstract class EntityRepository
         $stmt->execute();
     }
 
+
+    public function getPrimaryKey()
+    {
+        return $this->primaryKey;
+    }
+
+    public function getTable()
+    {
+        return $this->table;
+    }
 }

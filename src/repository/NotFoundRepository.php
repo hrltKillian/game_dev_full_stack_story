@@ -2,10 +2,10 @@
 
 require_once "EntityRepository.php";
 
-class ConceptRepository extends EntityRepository
+class NotFoundRepository extends EntityRepository
 {
     public function __construct()
     {
-        parent::__construct("concept", "name");
+        parent::__construct("user", "id");
     }
 }
