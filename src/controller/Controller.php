@@ -19,6 +19,11 @@ abstract class Controller
         $this->entityRepository = new $repositoryClass($table, $primaryKey);
     }
 
+    public function getView(string $viewName, array $data = []) : void
+    {
+        require_once "../../templates/" .$viewName. "/index.html.php";
+    }
+
     /**
      * Get all entities from a table
      * @return array ex : [ ["username" => "John", "password" => "ILovePHP"], ["username" => "Jane", "password" => "ILoveJava"] ]
