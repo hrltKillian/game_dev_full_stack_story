@@ -2,7 +2,7 @@
 
 require_once "../../public/config.php";
 
-class EntityRepository
+abstract class EntityRepository
 {
 
     public PDO $pdo;
