@@ -1,15 +1,27 @@
 <?php
 
-require_once "../config/config.php";
+require_once "../../public/config.php";
 
 class EntityRepository
 {
+
+    public PDO $pdo;
+
+    /**
+     * Connect to the database
+     * @return PDO
+     */
+    
     public static function connect() : PDO
     {
-        $string = "mysql:host=".DBHOST.";dbname=".DBNAME;
-        $pdo = new PDO($string, DBUSER, DBPWD);
-        return $pdo;
+        if (isset($pdo)) {
+            return $pdo;
+        } else {
+            $pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPWD);
+            return $pdo;
+        }
     }
+    
 
     /**
      * Get the PDO type from a string
