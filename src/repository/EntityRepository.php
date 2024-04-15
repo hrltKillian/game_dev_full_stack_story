@@ -1,5 +1,7 @@
 <?php
 
+require_once "../config/config.php";
+
 class EntityRepository
 {
     public static function connect() : PDO
