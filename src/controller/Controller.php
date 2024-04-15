@@ -5,77 +5,75 @@ require_once "../repository/EntityRepository.php";
 abstract class Controller
 {
     private EntityRepository $entityRepository;
-    private string $table;
 
-    public function __construct(string $table)
+    /**
+     * Constructor
+     * @param string $table ex : "users"
+     * @param string $primaryKey ex : "username"
+     * @param string $repositoryClass ex : "UserRepository"
+     * @return void
+     */
+
+    public function __construct(string $table, string $primaryKey, string $repositoryClass)
     {
-        $this->entityRepository = new EntityRepository();
-        $this->table = $table;
+        $this->entityRepository = new $repositoryClass($table, $primaryKey);
     }
 
     /**
      * Get all entities from a table
-     * @param string $table ex : "user"
      * @return array ex : [ ["username" => "John", "password" => "ILovePHP"], ["username" => "Jane", "password" => "ILoveJava"] ]
      */
 
     public function getAll() : array
     {
-        return $this->entityRepository->getAll($this->table);
+        return $this->entityRepository->getAll();
     }
 
     /**
      * Get an entity class from a table by primary key
-     * @param string $table ex : "user"
-     * @param string $primaryKey ex : "username"
      * @param string $valuePK ex : "John"
      * @return array ex : ["username" => "John", "password" => "ILovePHP"]
      */
 
-    public function getByPrimaryKey(string $table, string $primaryKey, string $valuePK) : array
+    public function getByPrimaryKey(string $valuePK) : array
     {
-        return $this->entityRepository->getByPrimaryKey($table, $primaryKey, $valuePK);
+        return $this->entityRepository->getByPrimaryKey($valuePK);
     }
 
     /**
      * Insert data into a table
-     * @param string $table ex : "user"
      * @param array $dataFieldsTypes ex : [ ["field1", "type1"], ["username", "str"] ]
      * @param array $dataValues ex : ["value", "John"]
      * @return void
      */
 
-    public function insert(string $table, array $dataFieldsTypes, array $dataValues) : void
+    public function insert(array $dataFieldsTypes, array $dataValues) : void
     {
-        $this->entityRepository->insert($this->table, $dataFieldsTypes, $dataValues);
+        $this->entityRepository->insert($dataFieldsTypes, $dataValues);
     }
 
     /**
      * Update data in a table
-     * @param string $table ex : "user"
      * @param array $dataFieldsTypes ex : [ ["field1", "type1"], ["username", "str"] ]
      * @param array $dataValues ex : ["value", "John"]
-     * @param string $primaryKey ex : "username"
      * @param string $valuePK ex : "John"
      * @return void
      */
 
-    public function update(string $table, array $dataFieldsTypes, array $dataValues, string $primaryKey, string $valuePK) : void
+    public function update($dataFieldsTypes, array $dataValues, string $valuePK) : void
     {
-        $this->entityRepository->update($this->table, $dataFieldsTypes, $dataValues, $primaryKey, $valuePK);
+        $this->entityRepository->update($dataFieldsTypes, $dataValues, $valuePK);
     }
 
     /**
      * Delete data from a table
-     * @param string $table ex : "user"
-     * @param string $primaryKey ex : "username"
      * @param string $valuePK ex : "John"
      * @return void
      */
 
-    public function delete(string $table, string $primaryKey, string $valuePK) : void
+    public function delete(string $valuePK) : void
     {
-        $this->entityRepository->delete($this->table, $primaryKey, $valuePK);
+        $this->entityRepository->delete($valuePK);
     }
 
 }

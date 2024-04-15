@@ -5,3 +5,4 @@ Commit n°3 : added database connexion and primary functions to use
 Commit n°4 : added class that represent each entity of the database
 Commit n°5 : updated EntityRepository.php to have a singleton of $pdo to have less request on the database
 Commit n°6 : added a controller and primary functions to use
+Commit n°7 : 
