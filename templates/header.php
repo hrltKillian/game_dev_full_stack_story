@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,5 +8,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <title>Game Dev</title>
 </head>
+
 <body>
-    <main>
+    <main class="d-flex justify-content-center">
+        <div class="card text-center m-5 w-50">
+            <div class="card-header d-flex justify-content-center">
+                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="/home">Home</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                                <a class="nav-link active" href="/user/login">Login</a>
+                                <a class="nav-link" href="/user/signup">SignUp</a>
+                                <a class="nav-link" href="/game">Game</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
