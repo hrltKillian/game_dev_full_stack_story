@@ -12,3 +12,4 @@ Commit n°10 : rearranged templates. Started rooter in index.php. Created 404 re
 Commit n°11 : finished rooter. updated getView to redirect to Notfound when the view is not found. Rearranged repository and entity requires.
 Commit n°12 : added header and footer
 Commit n°13 : added style on website. finished login form
+Commit n°14 : finished signup form
