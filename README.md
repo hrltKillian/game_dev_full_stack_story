@@ -10,3 +10,4 @@ Commit n°8 : added repositories and controllers for each entity
 Commit n°9 : added getView() in controller.php
 Commit n°10 : rearranged templates. Started rooter in index.php. Created 404 repository, controller and view. Redirection to 404 page finished. 
 Commit n°11 : finished rooter. updated getView to redirect to Notfound when the view is not found. Rearranged repository and entity requires.
+Commit n°12 : added header and footer
