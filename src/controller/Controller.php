@@ -23,7 +23,11 @@ abstract class Controller
 
     public function getView(string $viewName, array $data = []) : void
     {
-        require_once "../templates/".$viewName.".html.php";
+        if (file_exists("../templates/".$viewName.".html.php")) {
+            require_once "../templates/".$viewName.".html.php";
+        } else {
+            require_once "../templates/notFound.html.php";
+        }
     }
 
     /**

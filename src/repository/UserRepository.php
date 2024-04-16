@@ -1,6 +1,7 @@
 <?php
 
 require_once "EntityRepository.php";
+require_once "../src/entity/User.php";
 
 class UserRepository extends EntityRepository
 {

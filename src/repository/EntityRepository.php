@@ -7,11 +7,13 @@ abstract class EntityRepository
     protected PDO $pdo;
     protected string $table;
     protected string $primaryKey;
+    protected string $class;
 
     public function __construct(string $table, string $primaryKey)
     {
         $this->table = $table;
         $this->primaryKey = $primaryKey;
+        $this->class = ucfirst($table);
         $this->pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPWD);
     }
     
@@ -52,8 +54,7 @@ abstract class EntityRepository
         $query = "SELECT * FROM $this->table";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        $class = ucfirst($this->table);
-        $result = $stmt->fetchAll(PDO::FETCH_CLASS, $class::class);
+        $result = $stmt->fetchAll(PDO::FETCH_CLASS, $this->class);
         return $result;
     }
 
@@ -69,8 +70,7 @@ abstract class EntityRepository
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':valuePK', $valuePK, PDO::PARAM_STR);
         $stmt->execute();
-        $class = ucfirst($this->table);
-        $result = $stmt->fetch(PDO::FETCH_CLASS, $class::class);
+        $result = $stmt->fetch(PDO::FETCH_CLASS, $this->class);
         return $result;
     }
 

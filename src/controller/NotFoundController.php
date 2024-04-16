@@ -6,6 +6,6 @@ class NotFoundController extends Controller
 {
     public function __construct()
     {
-        parent::__construct('user', 'id', 'NotFoundRepository');
+        parent::__construct('user', 'notFound', 'NotFoundRepository');
     }
 }
