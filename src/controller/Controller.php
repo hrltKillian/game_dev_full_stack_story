@@ -6,6 +6,8 @@ require_once "../src/repository/NotFoundRepository.php";
 
 abstract class Controller
 {
+    public $ALLOWED_METHODS = ["add", "all", "edit", "delete"];
+
     protected EntityRepository $entityRepository;
 
     /**

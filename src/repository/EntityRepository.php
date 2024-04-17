@@ -68,9 +68,9 @@ abstract class EntityRepository
     {
         $query = "SELECT * FROM $this->table WHERE $this->primaryKey = :valuePK";
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':valuePK', $valuePK, PDO::PARAM_STR);
+        $stmt->bindParam(':valuePK', $valuePK);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_CLASS, $this->class);
+        $result = $stmt->fetchAll(PDO::FETCH_CLASS, $this->class);
         return $result;
     }
 

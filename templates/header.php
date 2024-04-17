@@ -24,6 +24,7 @@
                                 <a class="nav-link active" href="/user/login">Login</a>
                                 <a class="nav-link" href="/user/signup">SignUp</a>
                                 <a class="nav-link" href="/game">Game</a>
+                                <a class="nav-link" href="/user/deconnexion">Deconnexion</a>
                             </div>
                         </div>
                     </div>

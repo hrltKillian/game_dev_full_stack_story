@@ -13,3 +13,4 @@ Commit n°11 : finished rooter. updated getView to redirect to Notfound when the
 Commit n°12 : added header and footer
 Commit n°13 : added style on website. finished login form
 Commit n°14 : finished signup form
+Commit n°15 : managed errors for login when the username already exist or when the password is wrong
