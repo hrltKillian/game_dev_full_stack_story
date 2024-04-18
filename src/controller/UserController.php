@@ -30,4 +30,10 @@ class UserController extends Controller
         }
         return $errors;
     }
+
+    public function deconnexion()
+    {
+        session_destroy();
+        header('location: /home');
+    }
 }

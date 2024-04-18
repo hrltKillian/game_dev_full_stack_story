@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,20 +17,34 @@
 <body>
     <main class="d-flex justify-content-center">
         <div class="card text-center m-5 w-50">
-            <div class="card-header d-flex justify-content-center">
+            <div class="card-header d-flex justify-content-center align-items-center">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="/home">Home</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                            <div class="navbar-nav">
-                                <a class="nav-link active" href="/user/login">Login</a>
-                                <a class="nav-link" href="/user/signup">SignUp</a>
-                                <a class="nav-link" href="/game">Game</a>
-                                <a class="nav-link" href="/user/deconnexion">Deconnexion</a>
-                            </div>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                            </a>
+                            <?php if (isset($_SESSION['username'])) {
+                                echo "<p>". $_SESSION['username'] . "</p>";
+                            } ?>
+                            <ul class="dropdown-menu">
+                                <?php if (!isset($_SESSION['username'])) {
+                                    echo "<li><a class='dropdown-item' href='/user/login'>Login</a></li>";
+                                    echo "<li><a class='dropdown-item' href='/user/signup'>Sign Up</a></li>";
+                                } ?>
+                                <li><a class="dropdown-item" href="/user/deconnexion">Deconnexion</a></li>
+                            </ul>
+                        </div>
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="/home">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/game">Game</a>
+                                </li>
+
+                            </ul>
                         </div>
                     </div>
                 </nav>
