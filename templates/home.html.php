@@ -4,8 +4,6 @@ include 'header.php';
 
 <h1>Home</h1>
 
-<?= var_dump($_SESSION) ?>
-
 <div class="container">
     <div class="row">
         <div class="col-12">

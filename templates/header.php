@@ -20,13 +20,13 @@ session_start();
             <div class="card-header d-flex justify-content-center align-items-center">
                 <nav class="navbar navbar-expand-lg bg-body-tertiary">
                     <div class="container-fluid">
+                        <?php if (isset($_SESSION['username'])) {
+                            echo "<p class='mt-3'>" . $_SESSION['username'] . "</p>";
+                        } ?>
                         <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                             </a>
-                            <?php if (isset($_SESSION['username'])) {
-                                echo "<p>". $_SESSION['username'] . "</p>";
-                            } ?>
                             <ul class="dropdown-menu">
                                 <?php if (!isset($_SESSION['username'])) {
                                     echo "<li><a class='dropdown-item' href='/user/login'>Login</a></li>";
