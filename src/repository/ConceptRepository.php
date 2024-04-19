@@ -7,6 +7,6 @@ class ConceptRepository extends EntityRepository
 {
     public function __construct()
     {
-        parent::__construct("concept", "name");
+        parent::__construct("concept", "name", "user_username");
     }
 }

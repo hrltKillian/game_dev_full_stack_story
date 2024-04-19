@@ -59,7 +59,6 @@ class UserController extends Controller
             $errors['errorPassword'] = "Password is empty";
         }
         $usernames = $this->getUsernames();
-
         if (in_array($username, $usernames)) {
             $errors['errorUsername'] = "Username already exists";
         } else {
@@ -72,6 +71,33 @@ class UserController extends Controller
                 header('location: /home');
             } else {
                 $errors['errorPassword'] = "Passwords do not match";
+            }
+        }
+        return $errors;
+    }
+
+    public function updateUsername()
+    {
+        $ConceptController = new ConceptController();
+        $username = $_POST['newUsername'];
+        if (empty($username)) {
+            $errors['errorUsername'] = "Username is empty";
+        } else if (empty($_POST['password']) || empty($_POST['passwordConfirm'])) {
+            $errors['errorPassword'] = "Password is empty";
+        }
+        $usernames = $this->getUsernames();
+        if (in_array($username, $usernames)) {
+            $errors['errorUsername'] = "Username already exists";
+        } else {
+            $user = $this->entityRepository->getByPrimaryKey($_SESSION['username']);
+            if ($_POST['password'] == ($user[0]->getPassword())) {
+                $this->entityRepository->insert([["username", "str"],["password", "str"]], [$username, $user[0]->getPassword()]);
+                $ConceptController->updateAllConceptsUsername($username);
+                $this->entityRepository->delete($_SESSION['username']);
+                $_SESSION['username'] = $username;
+                header('location: /home');
+            } else {
+                $errors['errorPassword'] = "Password incorrect";
             }
         }
         return $errors;

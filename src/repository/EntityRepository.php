@@ -6,13 +6,15 @@ abstract class EntityRepository
 {
     protected PDO $pdo;
     protected string $table;
-    protected string $primaryKey;
+    protected string $primaryKey1;
+    protected string $primaryKey2;
     protected string $class;
 
-    public function __construct(string $table, string $primaryKey)
+    public function __construct(string $table, string $primaryKey1, string $primaryKey2 = "")
     {
         $this->table = $table;
-        $this->primaryKey = $primaryKey;
+        $this->primaryKey1 = $primaryKey1;
+        $this->primaryKey2 = $primaryKey2;
         $this->class = ucfirst($table);
         $this->pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPWD);
     }
@@ -64,11 +66,18 @@ abstract class EntityRepository
      * @return array ex : ["username" => "John", "password" => "ILovePHP"]
      */
 
-    public function getByPrimaryKey(string $valuePK) : array
+    public function getByPrimaryKey(string $valuePK1, string $valuePK2 = "") : array
     {
-        $query = "SELECT * FROM $this->table WHERE $this->primaryKey = :valuePK";
+        if ($valuePK2 == "") {
+            $query = "SELECT * FROM $this->table WHERE $this->primaryKey1 = :valuePK1";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam(':valuePK1', $valuePK1);
+        } else {
+        $query = "SELECT * FROM $this->table WHERE $this->primaryKey1 = :valuePK1 AND $this->primaryKey2 = :valuePK2";
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':valuePK', $valuePK);
+        $stmt->bindParam(':valuePK1', $valuePK1);
+        $stmt->bindParam(':valuePK2', $valuePK2);
+        }
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_CLASS, $this->class);
         return $result;
@@ -103,23 +112,35 @@ abstract class EntityRepository
      * Update data in a table
      * @param array $dataFieldsTypes ex : [ ["field1", "type1"], ["username", "str"] ]
      * @param array $dataValues ex : ["value", "John"]
-     * @param string $valuePK ex : "John"
+     * @param string $valuePK1 ex : "Brand"
+     * @param string $valuePK2 ex : "Jane"
      * @return void
      */
 
-    public function update(array $dataFieldsTypes, array $dataValues, string $valuePK) : void
+    public function update(array $dataFieldsTypes, array $dataValues, string $valuePK1, string $valuePK2 = "") : void
     {
         $fields = [];
         foreach ($dataFieldsTypes as $key => $value) {
             $fields[] = $value[0]." = :".$key;
         }
         $fields = implode(", ", $fields);
-        $query = "UPDATE $this->table SET $fields WHERE $this->primaryKey = :valuePK";
+
+        if ($valuePK2 == "") {
+            $query = "UPDATE $this->table SET $fields WHERE $this->primaryKey1 = :valuePK1";
+            $stmt = $this->pdo->prepare($query);
+            foreach ($dataFieldsTypes as $key => $value) {
+                $stmt->bindParam(":".$key, $dataValues[$key], self::getPDOType($value[1]));
+            }
+            $stmt->bindParam(':valuePK1', $valuePK1, PDO::PARAM_STR);
+        } else {
+        $query = "UPDATE $this->table SET $fields WHERE $this->primaryKey1 = :valuePK1 AND $this->primaryKey2 = :valuePK2";
         $stmt = $this->pdo->prepare($query);
         foreach ($dataFieldsTypes as $key => $value) {
             $stmt->bindParam(":".$key, $dataValues[$key], self::getPDOType($value[1]));
         }
-        $stmt->bindParam(':valuePK', $valuePK, PDO::PARAM_STR);
+        $stmt->bindParam(':valuePK1', $valuePK1, PDO::PARAM_STR);
+        $stmt->bindParam(':valuePK2', $valuePK2, PDO::PARAM_STR);
+        }
         $stmt->execute();
     }
 
@@ -129,18 +150,31 @@ abstract class EntityRepository
      * @return void
      */
 
-    public function delete(string $valuePK) : void
+    public function delete(string $valuePK1, string $valuePK2 = "") : void
     {
-        $query = "DELETE FROM $this->table WHERE $this->primaryKey = :valuePK";
+        if ($valuePK2 == "") {
+            $query = "DELETE FROM $this->table WHERE $this->primaryKey1 = :valuePK1";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam(':valuePK1', $valuePK1, PDO::PARAM_STR);
+        } else {
+        $query = "DELETE FROM $this->table WHERE $this->primaryKey1 = :valuePK1 AND $this->primaryKey2 = :valuePK2";
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':valuePK', $valuePK, PDO::PARAM_STR);
+        $stmt->bindParam(':valuePK1', $valuePK1, PDO::PARAM_STR);
+        $stmt->bindParam(':valuePK2', $valuePK2, PDO::PARAM_STR);
+        $stmt->execute();
+        }
         $stmt->execute();
     }
 
 
-    public function getPrimaryKey()
+    public function getPrimaryKey1()
     {
-        return $this->primaryKey;
+        return $this->primaryKey1;
+    }
+
+    public function getPrimaryKey2()
+    {
+        return $this->primaryKey2;
     }
 
     public function getTable()

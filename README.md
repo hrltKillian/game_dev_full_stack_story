@@ -16,3 +16,4 @@ Commit n°14 : finished signup form
 Commit n°15 : managed errors for login when the username already exist or when the password is wrong
 Commit n°16 : updated header with profil pic and added deconnexion
 Commit n°17 : added register() in UserController to signup, managed errors for sign up and added createAllConcept() in ConceptController to create all defaults data for the game
+Commit N°18 : added edit functionality to change user's username

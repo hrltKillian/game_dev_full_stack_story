@@ -31,7 +31,10 @@ session_start();
                                 <?php if (!isset($_SESSION['username'])) {
                                     echo "<li><a class='dropdown-item' href='/user/login'>Login</a></li>";
                                     echo "<li><a class='dropdown-item' href='/user/signup'>Sign Up</a></li>";
-                                } ?>
+                                } else {
+                                    echo "<li><a class='dropdown-item' href='/user/edit'>Edit profil</a></li>";
+                                }
+                                  ?>
                                 <li><a class="dropdown-item" href="/user/deconnexion">Deconnexion</a></li>
                             </ul>
                         </div>

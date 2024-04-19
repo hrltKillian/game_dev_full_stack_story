@@ -76,7 +76,7 @@ class App
             }
 
             // Si la clef primaire est "NotFound" (propre au controller NotFound) alors afficher la vue NotFound
-            if ($this->controller->getEntityRepository()->getPrimaryKey() == 'notFound') {
+            if ($this->controller->getEntityRepository()->getPrimaryKey1() == 'notFound') {
                 $this->controller->getView($view, $this->controller->getAll());
                 return;
             }
