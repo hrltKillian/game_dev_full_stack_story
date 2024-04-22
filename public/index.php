@@ -6,7 +6,7 @@ class App
 {
     public $URL;
     public $controller = 'Home';
-    public $method = 'getAll';
+    public $method = 'index';
     public $params = [];
 
     public function __construct($URL)
@@ -72,7 +72,7 @@ class App
             if (!empty($this->params[1] || in_array($this->params[1], $this->controller->ALLOWED_METHODS))){
                 $this->method = $this->params[1];
             } else {
-                $this->method = 'getAll';
+                $this->method = 'index';
             }
 
             // Si la clef primaire est "NotFound" (propre au controller NotFound) alors afficher la vue NotFound
@@ -81,6 +81,7 @@ class App
                 return;
             }
             // Afficher la vue associée au controller
+            
             $this->controller->getView($view, $this->controller->{$this->method}());
             
         } else {

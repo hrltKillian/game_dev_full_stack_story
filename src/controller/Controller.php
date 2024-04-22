@@ -32,6 +32,11 @@ abstract class Controller
         }
     }
 
+    public function index() : void
+    {
+        $this->getView("home");
+    }
+
     /**
      * Get all entities from a table
      * @return array ex : [ ["username" => "John", "password" => "ILovePHP"], ["username" => "Jane", "password" => "ILoveJava"] ]

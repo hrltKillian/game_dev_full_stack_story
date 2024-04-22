@@ -36,4 +36,5 @@ class ConceptController extends Controller
         $this->entityRepository->update([["user_username", "str"]], [$newUsername], "JavaScript", $_SESSION['username']);
         $this->entityRepository->update([["user_username", "str"]], [$newUsername], "MySQL", $_SESSION['username']);
     }
+
 }

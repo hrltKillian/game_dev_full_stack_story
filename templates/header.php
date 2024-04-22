@@ -29,13 +29,13 @@ session_start();
                             </a>
                             <ul class="dropdown-menu">
                                 <?php if (!isset($_SESSION['username'])) {
-                                    echo "<li><a class='dropdown-item' href='/user/login'>Login</a></li>";
-                                    echo "<li><a class='dropdown-item' href='/user/signup'>Sign Up</a></li>";
+                                    echo "<li><a class='dropdown-item' href='/user/login/getAll'>Login</a></li>";
+                                    echo "<li><a class='dropdown-item' href='/user/signup/getAll'>Sign Up</a></li>";
                                 } else {
-                                    echo "<li><a class='dropdown-item' href='/user/edit'>Edit profil</a></li>";
+                                    echo "<li><a class='dropdown-item' href='/user/edit/getAll'>Edit profil</a></li>";
                                 }
                                   ?>
-                                <li><a class="dropdown-item" href="/user/deconnexion">Deconnexion</a></li>
+                                <li><a class="dropdown-item" href="/user/deconnexion/getAll">Deconnexion</a></li>
                             </ul>
                         </div>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -44,7 +44,7 @@ session_start();
                                     <a class="nav-link active" href="/home">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/game">Game</a>
+                                    <a class="nav-link" href="/game/play/playing">Game</a>
                                 </li>
 
                             </ul>

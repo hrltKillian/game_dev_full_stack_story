@@ -22,12 +22,21 @@ class UserController extends Controller
     public function login()
     {
         $username = $_POST['username'];
+        $errors = [];
         if (empty($username)) {
-            $errors['errorUsername'] = "Username is empty";
+            if (isset($_SESSION['errorGame'])) {
+                $errors['errorGame'] = $_SESSION['errorGame'];
+                unset($_SESSION['errorGame']);
+            } else {
+                $errors['errorUsername'] = "Username is empty";
+            }
         } else if (empty($_POST['password'])) {
             $errors['errorPassword'] = "Password is empty";
         }
         $usernames = $this->getUsernames();
+        if (!empty($errors)) {
+            return $errors;
+        }
 
         if (in_array($username, $usernames)) {
             $user = $this->entityRepository->getByPrimaryKey($username);
@@ -53,6 +62,7 @@ class UserController extends Controller
     {
         $ConceptController = new ConceptController();
         $username = $_POST['username'];
+        $errors = [];
         if (empty($username)) {
             $errors['errorUsername'] = "Username is empty";
         } else if (empty($_POST['password']) || empty($_POST['passwordConfirm'])) {
@@ -80,6 +90,7 @@ class UserController extends Controller
     {
         $ConceptController = new ConceptController();
         $username = $_POST['newUsername'];
+        $errors = [];
         if (empty($username)) {
             $errors['errorUsername'] = "Username is empty";
         } else if (empty($_POST['password']) || empty($_POST['passwordConfirm'])) {

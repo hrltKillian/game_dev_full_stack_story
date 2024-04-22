@@ -6,6 +6,15 @@ class GameController extends Controller
 {
     public function __construct()
     {
-        parent::__construct("user", "id", "UserRepository");
+        parent::__construct("concept", "name", "ConceptRepository");
+    }
+
+    public function playing() : array
+    {
+        if (!isset($_SESSION['username'])) {
+            $_SESSION['errorGame'] = "You must be logged in to play";
+            header('location: /user/login/login');
+        }
+        return $this->getByPrimaryKey($_SESSION['username']);
     }
 }
